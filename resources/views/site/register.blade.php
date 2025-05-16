@@ -12,10 +12,10 @@
                 </div>
                 <div class="form-group mt-3  col-md-6">
                     <label for="category">Selecione a Categoria</label>
-                    <select name="category" id="category" class="form-control">
-                        <option value="traditional">Tradicional</option>
-                        <option value="special">Especial</option>
-                        <option value="sweet">Doce</option>
+                    <select name="id_category" id="category" class="form-control">
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group my-3  col-md-6">

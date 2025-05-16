@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Pizza;
 
@@ -23,7 +24,8 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        return view('site.register');
+        $categories = Category::all();
+        return view('site.register', ['categories' => $categories]);
     }
 
     /**
@@ -33,11 +35,13 @@ class PizzaController extends Controller
     {
         $request->validate([
             'flavor' => 'required',
+            'id_category' => 'required',
             'description' => 'required|max:100'
         ]);
 
         $pizza = new Pizza();
         $pizza->flavor = $request->flavor;
+        $pizza->id_category = $request->id_category;
         $pizza->description = $request->description;
         $pizza->save();
 
