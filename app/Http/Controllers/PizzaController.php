@@ -24,8 +24,7 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('site.register', ['categories' => $categories]);
+        return view('site.register');
     }
 
     /**
@@ -35,13 +34,13 @@ class PizzaController extends Controller
     {
         $request->validate([
             'flavor' => 'required',
-            'id_category' => 'required',
+            'category' => 'required',
             'description' => 'required|max:100'
         ]);
 
         $pizza = new Pizza();
         $pizza->flavor = $request->flavor;
-        $pizza->id_category = $request->id_category;
+        $pizza->category = $request->category;
         $pizza->description = $request->description;
         $pizza->save();
 
@@ -61,7 +60,13 @@ class PizzaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
+        $pizza = Pizza::where('id', $id)->first();
+        if($pizza) return view('site.edit', ['pizza' => $pizza]);
+        
+
+        return redirect()->route("pizza.index");   
+           
     }
 
     /**
@@ -69,7 +74,12 @@ class PizzaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         $data = [
+            'flavor' => $request->flavor,
+            'description' => $request->description
+        ];
+        Pizza::where('id', $id)->update($data);
+        return redirect()->route("pizza.index");
     }
 
     /**
@@ -77,6 +87,7 @@ class PizzaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+      Pizza::where('id', $id)->delete();
+      return redirect()->route("pizza.index");
     }
 }

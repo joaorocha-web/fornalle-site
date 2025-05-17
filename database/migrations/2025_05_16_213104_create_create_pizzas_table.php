@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('flavor');
             $table->string('description');
-
-            $table->unsignedBigInteger('id_category');
-            $table->foreign('id_category')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('category');
 
             $table->timestamps();
         });
