@@ -18,7 +18,6 @@
             </div>
             <ul id="links">
                 <li><a href="{{route('pizza.index')}}">Entrar</a></li>
-                <li><a href="#traditional">Tradicionais</a></li>
                 <li><a href="#sweet">Doces</a></li>
                 <li><a href="#special">Especiais</a></li>
             </ul>

@@ -59,7 +59,7 @@ header{
 }
 
 header > i{
-    position: fixed;
+    position: absolute;
     top: 2px;
     right: 5px;
     font-size: 2rem;
@@ -69,14 +69,14 @@ header > i{
 
 #menu{
     display: none;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
-    width: 170px;
+    min-width: 90px;
     background-color: #fff0d9f3;
     border-radius: 0px 0px 0px 5px;
     padding-bottom: 15px;
-    z-index: 110;
+    z-index: 10;
 }
 
 #menu > div{
@@ -96,7 +96,6 @@ header > i{
     padding-top: 10px;
     list-style: none;
     font-size: 1.2rem;
-    margin-left: 10px;
 }
 
 #links>li>a{
