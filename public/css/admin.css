@@ -76,7 +76,7 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
+    padding: 15px 40px;
 }
 
 footer{

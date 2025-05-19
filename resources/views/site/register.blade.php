@@ -13,8 +13,8 @@
                 </div>
                 <div class="form-group mt-3  col-md-6">
                     <label for="category">Selecione a Categoria</label>
-                    <select name="category" id="category" class="form-control">
-                        <option value="tradicional">Tradicional</option>
+                    <select name="category" id="category" class="form-control" required>
+                        <option value="Tradicional">Tradicional</option>
                         <option value="Especial">Especial</option>
                         <option value="Doce">Doce</option>
                     </select>
@@ -35,7 +35,7 @@
                     </select>
                 </div>
 
-                <div class="text-end  col-md-6 mb-4">
+                <div class="text-end  col-md-6 my-3">
                     <button class="btn btn-primary text-end">Criar</button>
                 </div>
             </form>

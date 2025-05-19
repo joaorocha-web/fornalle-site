@@ -14,9 +14,9 @@
                 <div class="form-group mt-3  col-md-6">
                     <label for="category">Selecione a Categoria</label>
                     <select name="category" id="category" class="form-control">
-                        <option value="tradicional">Tradicional</option>
-                        <option value="Especial">Especial</option>
-                        <option value="Doce">Doce</option>
+                        <option value="Tradicional">Tradicional</option>
+                        <option value="Especial" @if ($pizza->category == 'Especial') selected  @endif>Especial</option>
+                        <option value="Doce"  @if ($pizza->category == 'Doce') selected  @endif>Doce</option>
                     </select>
                 </div>
                 <div class="form-group my-3  col-md-6">
@@ -31,7 +31,8 @@
                     <label for="status">Status</label>
                     <select name="status" id="status" class="form-control">
                         <option value="ativo">Ativo</option>
-                        <option value="inativo">Inativo</option>
+                        <option value="inativo"
+                         @if ($pizza->status == 'inativo') selected  @endif>Inativo</option>
                     </select>
                 </div>
                 <div class="text-end  col-md-6 my-3">

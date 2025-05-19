@@ -16,8 +16,8 @@
                     @foreach ($pizzas as $pizza)
                         <tr>
                             <td>{{$pizza->name}}</td>
-                            <td >{{$pizza->description}}</td>
-                            <td>{{$pizza->price}}</td>
+                            <td class="reticence">{{$pizza->description}}</td>
+                            <td>R$ {{number_format($pizza->price, 2, ",", ".")}}</td>
                             <td>{{$pizza->category}}</td>
                             <td>{{$pizza->status}}</td>
                             <td class="d-flex">

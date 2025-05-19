@@ -5,7 +5,7 @@
         <h2>Tradicionais</h2>
         <div class="pizzas">
             @foreach ($pizzas as $pizza)
-                @if ($pizza->category === 'tradicional')
+                @if ($pizza->category === 'Tradicional' && $pizza->status === 'ativo')
                     <div class="pizza">
                     <img class="img-pizza" src="/images/pizza-especial-250px.jpg" alt="">
                     <div class="description">
@@ -28,7 +28,7 @@
         <h2>Doces:</h2>
         <div class="pizzas">
             @foreach ($pizzas as $pizza)
-                @if ($pizza->category === 'Doce')
+                @if ($pizza->category === 'Doce' && $pizza->status === 'ativo')
                     <div class="pizza">
                     <img class="img-pizza" src="/images/pizza-especial-250px.jpg" alt="">
                     <div class="description">
@@ -51,7 +51,7 @@
         <h2>Especiais:</h2>
         <div class="pizzas">
             @foreach ($pizzas as $pizza)
-                @if ($pizza->category === 'Especial')
+                @if ($pizza->category === 'Especial' && $pizza->status === 'ativo')
                     <div class="pizza">
                     <img class="img-pizza" src="/images/pizza-especial-250px.jpg" alt="">
                     <div class="description">
