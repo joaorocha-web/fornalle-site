@@ -1,21 +1,25 @@
-@extends('site.template')
+@extends('templates.templateAdmin')
 @section('title', 'Pizzas')
 @section('content')
         <h2>Tabela de Pizzas Cadastradas</h2>
-        <div class="container mt-3">
-            <table class="table table-hover table-bordered table-striped">
+        
+            <table class="table table-hover table-bordered table-striped m-3">
                 <thead>
                     <th>Sabor</th>
                     <th>Descrição</th>
+                    <th>Valor</th>
                     <th>Categoria</th>
+                    <th>Status</th>
                     <th>Alterar/delete</th>
                 </thead>
                 <tbody>
                     @foreach ($pizzas as $pizza)
                         <tr>
-                            <td>{{$pizza->flavor}}</td>
-                            <td>{{$pizza->description}}</td>
+                            <td>{{$pizza->name}}</td>
+                            <td >{{$pizza->description}}</td>
+                            <td>{{$pizza->price}}</td>
                             <td>{{$pizza->category}}</td>
+                            <td>{{$pizza->status}}</td>
                             <td class="d-flex">
                                 <a class="btn btn-outline-primary btn-sm me-3" href="{{route('pizza.edit' , ['id' => $pizza->id])}}"><i class="bi bi-pencil"></i></a>
                                 <form action="{{route('pizza.destroy' , ['id' => $pizza->id])}}" method="POST">
@@ -31,7 +35,7 @@
                 </tbody>
             </table>
             <button class="btn btn-success mb-4"><a class="text-white" href="{{route('pizza.create')}}">Novo Sabor +</a></button>
-        </div>
+        
     
 @endsection
     

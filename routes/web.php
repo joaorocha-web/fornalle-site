@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PizzaController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Pizza;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LoginController::class, 'index'])->name('login');
-Route::post('/', [LoginController::class, 'validation'])->name('verifyLogin');
+Route::get('/', function(){
+    $pizzas = Pizza::all();
+    return view('site.index', ['pizzas' => $pizzas]);
+});
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'validation'])->name('verifyLogin');
 
 Route::prefix('pizza')->group(function(){
     Route::get('/', [PizzaController::class, 'index'])->name('pizza.index');

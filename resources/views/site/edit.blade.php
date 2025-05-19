@@ -1,4 +1,4 @@
-   @extends('site.template') 
+   @extends('templates.templateAdmin') 
    @section('title', 'cadastro')
    @section('content')
     <div class="container mt-3">
@@ -8,23 +8,34 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group mt-3  col-md-6">
-                    <label for="flavor">Sabor</label>
-                    <input type="text" name="flavor" id="flavor" value="{{$pizza->flavor}}" placeholder="Adicione o nome do novo sabor" class="form-control">
+                    <label for="name">Sabor</label>
+                    <input type="text" name="name" id="name" value="{{$pizza->name}}" placeholder="Adicione o nome do novo sabor" class="form-control">
                 </div>
                 <div class="form-group mt-3  col-md-6">
                     <label for="category">Selecione a Categoria</label>
-                    <select name="id_category" id="category" class="form-control">
-                        @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
+                    <select name="category" id="category" class="form-control">
+                        <option value="tradicional">Tradicional</option>
+                        <option value="Especial">Especial</option>
+                        <option value="Doce">Doce</option>
                     </select>
                 </div>
                 <div class="form-group my-3  col-md-6">
                     <label for="description">Descrição</label>
                     <textarea name="description" id="description"  rows="3" class="form-control">{{$pizza->description}}</textarea>
                 </div>
-                <div class="text-end  col-md-6 mb-4">
-                    <button class="btn btn-primary text-end">Criar</button>
+                <div class="form-group my-3  col-md-6">
+                    <label for="price">Valor:</label>
+                    <input type="number" step="0.01" name="price" id="price"  rows="3" class="form-control" placeholder="Ex: 77.69" value="{{$pizza->price}}"></input>
+                </div>
+                <div class="form-group mt-3  col-md-6">
+                    <label for="status">Status</label>
+                    <select name="status" id="status" class="form-control">
+                        <option value="ativo">Ativo</option>
+                        <option value="inativo">Inativo</option>
+                    </select>
+                </div>
+                <div class="text-end  col-md-6 my-3">
+                    <button class="btn btn-primary text-end">Salvar</button>
                 </div>
             </form>
         </div>

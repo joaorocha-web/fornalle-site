@@ -49,6 +49,7 @@ body{
 header{
     grid-area: header;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-image: url(../images/principal-900px-escuro.jpeg);
@@ -56,6 +57,56 @@ header{
     background-size: cover;
     
 }
+
+header > i{
+    position: fixed;
+    top: 2px;
+    right: 5px;
+    font-size: 2rem;
+    color: var(--cor3);
+    cursor: pointer;
+}
+
+#menu{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 170px;
+    background-color: #fff0d9f3;
+    border-radius: 0px 0px 0px 5px;
+    padding-bottom: 15px;
+    z-index: 110;
+}
+
+#menu > div{
+    display: flex;
+    justify-content: right;
+}
+
+#menu  i{
+    padding-top: 2px;
+    padding-right: 5px;
+    font-size: 2rem;
+    cursor: pointer;
+   
+}
+
+#links>li{
+    padding-top: 10px;
+    list-style: none;
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+
+#links>li>a{
+    color: #000;
+    text-decoration: none;
+    margin-top: 10px;
+    font-family: var(--fonteTitulo);
+    font-weight: 500;
+}
+
 
 header .boas-vindas{
     display: flex;
@@ -68,6 +119,81 @@ header .boas-vindas{
 
 main{
     grid-area: content;
+    background-color: var(--cor3);
+}
+
+main #traditional{
+    padding: 50px 5px;
+}
+
+main #sweet{
+    padding: 50px 5px;
+    background-color: #4b2800;
+    color: #fff;
+}
+
+main #special{
+    padding: 50px 5px;
+    background-color: #000;
+    color: #fff;
+}
+
+main .pizzas{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+main .pizza{
+    display: flex;
+    align-items: center;
+    padding:10px;
+    margin:0px 10px 10px 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.237);
+    border-radius: 10px;  
+} 
+
+main .pizza .img-pizza{
+    width: 180px;
+    height: 150px;
+    border-radius: 6px;
+}
+
+main .pizza .description{
+    display: flex;
+    flex-flow: column;
+    margin-left: 10px;
+    max-width: 260px;
+    font-size: .8rem;
+}
+
+main .pizza .description  div{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+main .pizza .description  div p{
+    font-size: 1.3rem;
+}
+
+@media (min-width: 1040px){
+    main .pizzas{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    main .pizza .description{
+        width: 320px;
+    }
+
+    main .pizza:hover{
+        background-color: #000;
+        color: var(--cor3);
+    }
 }
 
 footer{

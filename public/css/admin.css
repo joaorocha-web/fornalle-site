@@ -1,0 +1,85 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root{
+    --cor1: #BD3537;
+    --cor2: #0E7D4F;
+    --cor3: #FFF0D9; 
+    --fonteTitulo: "Cinzel Decorative"; 
+    --fonteTexto: "Open Sans";
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: var(--fonteTexto);
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+h1{
+    font-family: var(--fonteTitulo);
+    font-size: 3rem;
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
+    color: var(--cor3);
+}
+
+h2{
+    font-family: var(--fonteTitulo);
+    font-weight: 500;
+    padding: 10px;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    height: 100vh;
+    display: grid;
+    grid-template-rows:  150px 1fr 30px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "content" "footer";
+}
+
+header{
+    grid-area: header;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../images/principal-900px-escuro.jpeg);
+    background-position:top center;
+    background-size: cover;
+    
+}
+
+header .header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header .header p{
+    font-size: 1.3rem;
+    padding: 8px;
+    background-color: #0d6dfde9;
+    color: var(--cor3);
+    border-radius: 4px;
+}
+
+main{
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+footer{
+    grid-area: footer;
+    background-color: var(--cor1);
+}

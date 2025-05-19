@@ -33,15 +33,18 @@ class PizzaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'flavor' => 'required',
+            'name' => 'required',
             'category' => 'required',
-            'description' => 'required|max:100'
+            'description' => 'required|max:100',
+            'price' => 'required|numeric|min:0',
         ]);
 
         $pizza = new Pizza();
-        $pizza->flavor = $request->flavor;
+        $pizza->name = $request->name;
         $pizza->category = $request->category;
         $pizza->description = $request->description;
+        $pizza->price = $request->price;
+        $pizza->status = $request->status;
         $pizza->save();
 
         return redirect()->route("pizza.index");
@@ -75,8 +78,11 @@ class PizzaController extends Controller
     public function update(Request $request, string $id)
     {
          $data = [
-            'flavor' => $request->flavor,
-            'description' => $request->description
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'category' => $request->category,
+            'status' => $request->status
         ];
         Pizza::where('id', $id)->update($data);
         return redirect()->route("pizza.index");
