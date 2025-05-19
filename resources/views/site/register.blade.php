@@ -13,9 +13,9 @@
                 <div class="form-group mt-3  col-md-6">
                     <label for="category">Selecione a Categoria</label>
                     <select name="category" id="category" class="form-control">
-                        <option value="category">Tradicional</option>
-                        <option value="category">Especial</option>
-                        <option value="category">Doce</option>
+                        <option value="tradicional">Tradicional</option>
+                        <option value="Especial">Especial</option>
+                        <option value="Doce">Doce</option>
                     </select>
                 </div>
                 <div class="form-group my-3  col-md-6">
