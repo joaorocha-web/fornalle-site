@@ -121,6 +121,40 @@ main{
     background-color: var(--cor3);
 }
 
+main .cart{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor2);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    box-shadow: 3px 4px 12px #0000006b;
+}
+
+main .cart .ico-Cart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor3);
+    width: 65px;
+    height: 65px;
+    border-radius: 50px;
+
+}
+
+main .cart .ico-Cart i{
+    font-size: 1.7rem;
+}
+
+main .cart .ico-Cart:hover  i{
+    font-size: 2rem;
+    color: var(--cor3);
+}
+
 main #traditional{
     padding: 50px 5px;
 }

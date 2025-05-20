@@ -30,6 +30,11 @@
           
     </header>
     <main>
+        <div class="cart">
+            <div class="ico-Cart">
+                <i class="bi bi-cart-plus "></i>
+            </div>
+        </div>
         @yield('content')
     </main>
     <footer>

@@ -15,6 +15,7 @@
                             <strong>
                                 <p>R${{number_format($pizza->price, 2, ',', '.')}}</p>
                             </strong>
+                            
                             <button class="btn btn-success btn-md mb-3">Pedir</button>
                         </div>
                     </div>

@@ -34,3 +34,4 @@ Route::put('/{id}', [PizzaController::class, 'update'])->where('id','[0-9]+')->n
 Route::delete('/{id}', [PizzaController::class, 'destroy'])->where('id','[0-9]+')->name('pizza.destroy');
 
 
+
