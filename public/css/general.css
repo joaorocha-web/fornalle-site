@@ -26,6 +26,7 @@ h1{
     font-size: 3rem;
     text-shadow: 2px 2px 5px rgb(0, 0, 0);
     color: var(--cor3);
+    font-weight: 700;
 }
 
 h2{
@@ -129,30 +130,45 @@ main .cart{
     justify-content: center;
     align-items: center;
     background-color: var(--cor2);
-    width: 70px;
-    height: 70px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     box-shadow: 3px 4px 12px #0000006b;
 }
 
 main .cart .ico-Cart{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--cor3);
-    width: 65px;
-    height: 65px;
+    width: 60px;
+    height: 60px;
     border-radius: 50px;
-
 }
 
 main .cart .ico-Cart i{
     font-size: 1.7rem;
+    
 }
 
-main .cart .ico-Cart:hover  i{
-    font-size: 2rem;
-    color: var(--cor3);
+
+main .cart .ico-Cart .qtd{
+    position: absolute;
+    top: -4px;
+    right: -2px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    padding: 3px;
+    background-color: #fff;
+    border: .5px solid var(--cor1);
+    border-radius: 50%;
+    color: var(--cor1);
+    z-index: 100;
 }
 
 main #traditional{
@@ -212,6 +228,10 @@ main .pizza .description  div p{
 }
 
 @media (min-width: 1040px){
+    main .cart .ico-Cart:hover  i{
+    font-size: 2rem;
+    color: var(--cor2);
+}
     main .pizzas{
         display: flex;
         flex-flow: row wrap;
