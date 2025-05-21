@@ -21,6 +21,7 @@ Route::get('/', function(){
     return view('site.index', ['pizzas' => $pizzas]);
 })->name('main');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/login', [LoginController::class, 'validation'])->name('verifyLogin');
 
 Route::prefix('pizza')->group(function(){

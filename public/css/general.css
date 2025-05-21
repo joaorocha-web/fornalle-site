@@ -68,6 +68,17 @@ header > i{
     cursor: pointer;
 }
 
+.user-logged{
+    position: absolute;
+    top: 18px;
+    left: 0px;
+    padding: 5px;
+    background-color: var(--cor1);
+    border-radius: 0px 5px 5px 0px;
+    color: var(--cor3);
+    font-size: .8rem;
+}
+
 #menu{
     display: none;
     position: absolute;

@@ -48,6 +48,7 @@ body{
 
 header{
     grid-area: header;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,6 +70,18 @@ header .header p{
     background-color: #0d6dfde9;
     color: var(--cor3);
     border-radius: 4px;
+}
+
+header .nav{
+    display: flex;
+    gap: 15px;
+    position: absolute;
+    bottom: 0px;
+    left: 15px;
+}
+
+header .nav a{
+    color: var(--cor3);
 }
 
 main{

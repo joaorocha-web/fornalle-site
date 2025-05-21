@@ -11,6 +11,11 @@
 </head>
 <body>
     <header>
+        @if (auth()->user())
+                <div class="user-logged">
+                   <i class="bi bi-person-circle"></i> {{auth()->user()->name}} 
+                </div>
+        @endif
         <i class="bi bi-list" id="open-menu"></i>
         <menu id="menu">
             <div>
@@ -18,10 +23,10 @@
             </div>
             <ul id="links">
                 @if (auth()->user())
-                <li>{{auth()->user()->name}}</li>
-                @endif
-                <li><a href="{{route('pizza.index')}}">Area Adm</a></li>
-                <li><a href="{{route('login')}}">Entrar</a></li>
+                <li><a href="{{route('pizza.index')}}">Area Adm</a></li>    
+                @else
+                <li><a href="{{route('login')}}">Entrar</a></li>   
+                @endif               
                 <li><a href="#sweet">Doces</a></li>
                 <li><a href="#special">Especiais</a></li>
             </ul>

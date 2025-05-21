@@ -27,7 +27,10 @@ class LoginController extends Controller
             return redirect()->back()->with('error', 'Usuário Inválido');
         }
         
+    }
 
-        
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('main');
     }
 }

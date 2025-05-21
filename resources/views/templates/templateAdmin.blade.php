@@ -14,7 +14,10 @@
         <div class="header">
             <h1>Fornalle Tratoria</h1>
             <p>Área administrativa</p> 
-            <button class="btn btn-success btn-sm"><a href="{{route('main')}}">view</a></button>
+            <div class="nav">
+                <button class="btn btn-success btn-md"><a href="{{route('main')}}">View</a></button>
+                <button class="btn btn-danger btn-md"><a href="{{route('logout')}}">Logout</a></button>
+            </div>
     </header>
     <main>
         @yield('content')

@@ -9,7 +9,7 @@
     <title>Login</title>
 </head>
 <body>
-    <div class="card shadow">
+    <div class="card">
         <div class="card-header p-2 d-flex justify-content-center "><h1>Login</h1></div>
         <div class="card-body">
             

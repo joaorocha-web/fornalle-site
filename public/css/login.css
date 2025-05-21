@@ -3,12 +3,18 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #ccc;
+    background-image:url(../images/principal-900px-escuro.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
 }
 
 .card{
+    box-shadow: 4px 5px 15px #000 ;;
     width: 400px;
 }
+
+
 
 a{
     text-decoration: none;

@@ -2,7 +2,6 @@
 @section('title', 'Pizzas')
 @section('content')
         <h2>Tabela de Pizzas Cadastradas</h2>
-        <h3>Bem vindo {{auth()->user()->name}}</h3>
         
             <table class="table table-hover table-bordered table-striped m-3">
                 <thead>
