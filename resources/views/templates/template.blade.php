@@ -17,6 +17,10 @@
                 <i class="bi bi-list" id="close-menu"></i>
             </div>
             <ul id="links">
+                @if (auth()->user())
+                <li>{{auth()->user()->name}}</li>
+                @endif
+                <li><a href="{{route('pizza.index')}}">Area Adm</a></li>
                 <li><a href="{{route('login')}}">Entrar</a></li>
                 <li><a href="#sweet">Doces</a></li>
                 <li><a href="#special">Especiais</a></li>

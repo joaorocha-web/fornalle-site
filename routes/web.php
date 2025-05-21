@@ -19,7 +19,7 @@ use App\Models\Pizza;
 Route::get('/', function(){
     $pizzas = Pizza::all();
     return view('site.index', ['pizzas' => $pizzas]);
-});
+})->name('main');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'validation'])->name('verifyLogin');
 

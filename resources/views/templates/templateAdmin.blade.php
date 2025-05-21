@@ -14,7 +14,7 @@
         <div class="header">
             <h1>Fornalle Tratoria</h1>
             <p>Área administrativa</p> 
-            
+            <button class="btn btn-success btn-sm"><a href="{{route('main')}}">view</a></button>
     </header>
     <main>
         @yield('content')
