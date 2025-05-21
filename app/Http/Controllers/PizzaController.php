@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Pizza;
 
@@ -37,7 +37,12 @@ class PizzaController extends Controller
             'category' => 'required',
             'description' => 'required|max:100',
             'price' => 'required|numeric|min:0',
+            'image_url' => 'required|image',
         ]);
+
+        $fileName = rand(0, 99) . '-' . $request->file('image_url')->getClientOriginalName();
+        $path = $request->file('image_url')->storeAs('pizza_images', $fileName);
+      
 
         $pizza = new Pizza();
         $pizza->name = $request->name;
@@ -45,10 +50,13 @@ class PizzaController extends Controller
         $pizza->description = $request->description;
         $pizza->price = $request->price;
         $pizza->status = $request->status;
+        $pizza->image_url = $path;
         $pizza->save();
 
         return redirect()->route("pizza.index");
     }
+
+    
 
     /**
      * Display the specified resource.
@@ -72,20 +80,55 @@ class PizzaController extends Controller
            
     }
 
+
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-         $data = [
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'category' => $request->category,
-            'status' => $request->status
-        ];
-        Pizza::where('id', $id)->update($data);
-        return redirect()->route("pizza.index");
+         $request->validate([
+        'name' => 'required',
+        'category' => 'required',
+        'description' => 'required|max:100',
+        'price' => 'required|numeric|min:0',
+        'image_url' => 'sometimes|image', 
+    ]);
+
+    $pizza = Pizza::findOrFail($id);
+
+    // Verifica se uma nova imagem foi enviada
+    if ($request->hasFile('image_url')) {
+        // Remove a imagem antiga se existir
+        if ($pizza->image_url && Storage::exists($pizza->image_url)) {
+            Storage::delete($pizza->image_url);
+        }
+
+        // Faz upload da nova imagem (mesma lógica do store)
+        $fileName = rand(0, 99) . '-' . $request->file('image_url')->getClientOriginalName();
+        $path = $request->file('image_url')->storeAs('pizza_images', $fileName);
+        $pizza->image_url = $path;
+    }
+
+    // Atualiza os outros campos
+    $pizza->name = $request->name;
+    $pizza->category = $request->category;
+    $pizza->description = $request->description;
+    $pizza->price = $request->price;
+    $pizza->status = $request->status;
+    
+    $pizza->save();
+
+    return redirect()->route("pizza.index")->with('success', 'Pizza atualizada com sucesso!');
+        
+        //  $data = [
+        //     'name' => $request->name,
+        //     'description' => $request->description,
+        //     'price' => $request->price,
+        //     'category' => $request->category,
+        //     'status' => $request->status,
+        // ];
+        // Pizza::where('id', $id)->update($data);
+        // return redirect()->route("pizza.index");
     }
 
     /**
@@ -93,7 +136,16 @@ class PizzaController extends Controller
      */
     public function destroy(string $id)
     {
-      Pizza::where('id', $id)->delete();
-      return redirect()->route("pizza.index");
+        $pizza = Pizza::findOrFail($id);
+    
+    // Remove a imagem do storage se existir
+    if ($pizza->image_url && Storage::exists($pizza->image_url)) {
+        Storage::delete($pizza->image_url);
+    }
+    
+    // Deleta o registro do banco de dados
+    $pizza->delete();
+    
+    return redirect()->route("pizza.index")->with('success', 'Pizza removida com sucesso!');
     }
 }

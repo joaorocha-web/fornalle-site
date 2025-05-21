@@ -4,7 +4,7 @@
     <div class="container mt-3">
         <div class=" row">
         
-            <form method="POST" action="{{route('pizza.update', ['id' => $pizza->id])}}">
+            <form method="POST" action="{{route('pizza.update', ['id' => $pizza->id])}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group mt-3  col-md-6">
@@ -35,9 +35,18 @@
                          @if ($pizza->status == 'inativo') selected  @endif>Inativo</option>
                     </select>
                 </div>
+                 <div class="form-group my-3  col-md-6">
+                    <label for="image_url">Adicione uma imagem:</label>
+                    <input type="file" name="image_url" id="image_url"  rows="3" class="form-control"></input>
+                </div>
+                 @if($pizza->image_url)
+                    <img src="{{ asset('storage/'.$pizza->image_url) }}" width="100">
+                    <small>Imagem atual</small>
+                @endif
                 <div class="text-end  col-md-6 my-3">
                     <button class="btn btn-primary text-end">Salvar</button>
                 </div>
+
             </form>
         </div>
     </div>

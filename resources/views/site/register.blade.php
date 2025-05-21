@@ -5,7 +5,7 @@
     <div class="container mt-3">
         <div class=" row">
         
-            <form method="POST" action="{{route('pizza.store')}}">
+            <form method="POST" action="{{route('pizza.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mt-3  col-md-6">
                     <label for="name">Sabor</label>
@@ -34,6 +34,11 @@
                         <option value="inativo">Inativo</option>
                     </select>
                 </div>
+                <div class="form-group my-3  col-md-6">
+                    <label for="image_url">Adicione uma imagem:</label>
+                    <input type="file" name="image_url" id="image_url"  rows="3" class="form-control" placeholder="250px/ 250px"></input>
+                </div>
+
 
                 <div class="text-end  col-md-6 my-3">
                     <button class="btn btn-primary text-end">Criar</button>

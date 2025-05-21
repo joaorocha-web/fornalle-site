@@ -7,7 +7,7 @@
             @foreach ($pizzas as $pizza)
                 @if ($pizza->category === 'Tradicional' && $pizza->status === 'ativo')
                     <div class="pizza">
-                    <img class="img-pizza" src="/images/pizza-especial-250px.jpg" alt="">
+                    <img class="img-pizza" src="{{asset("storage/{$pizza->image_url}")}}" alt="">
                     <div class="description">
                         <h3>{{$pizza->name}}</h3>
                         <p>{{$pizza->description}}</p>
@@ -15,8 +15,9 @@
                             <strong>
                                 <p>R${{number_format($pizza->price, 2, ',', '.')}}</p>
                             </strong>
-                            
-                            <button class="btn btn-success btn-md mb-3">Pedir</button>
+                                <button type="submit" class="btn btn-success mb-3">
+                                    <i class="fas fa-cart-plus"></i> Adicionar
+                                </button>
                         </div>
                     </div>
                     </div>
@@ -31,7 +32,7 @@
             @foreach ($pizzas as $pizza)
                 @if ($pizza->category === 'Doce' && $pizza->status === 'ativo')
                     <div class="pizza">
-                    <img class="img-pizza" src="/images/pizza-especial-250px.jpg" alt="">
+                    <img class="img-pizza" src="{{asset("storage/{$pizza->image_url}")}}" alt="">
                     <div class="description">
                         <h3>{{$pizza->name}}</h3>
                         <p>{{$pizza->description}}</p>
@@ -54,7 +55,7 @@
             @foreach ($pizzas as $pizza)
                 @if ($pizza->category === 'Especial' && $pizza->status === 'ativo')
                     <div class="pizza">
-                    <img class="img-pizza" src="/images/pizza-especial-250px.jpg" alt="">
+                    <img class="img-pizza" src="{{asset("storage/{$pizza->image_url}")}}" alt="">
                     <div class="description">
                         <h3>{{$pizza->name}}</h3>
                         <p>{{$pizza->description}}</p>
