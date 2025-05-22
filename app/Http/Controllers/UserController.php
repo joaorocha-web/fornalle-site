@@ -12,9 +12,10 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-
+       
         $user = $request->all();
-        // $user['password'] = bcrypt($request->password);
+        $user['password'] = bcrypt($request->password);
+        $user['remember_token'] = $request->remember_token ? Str::random(60) : null;
         User::create($user);
     }
 }
