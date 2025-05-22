@@ -12,12 +12,11 @@
 <body>
     <header>
         <div class="header">
+             <a class="logout" href="{{route('logout')}}"><i class="bi bi-box-arrow-right"></i> Sair</a>
+             <a class="view" href="{{route('main')}}"><i class="bi bi-eye"></i> View</a>
             <h1>Fornalle Tratoria</h1>
             <p>Área administrativa</p> 
-            <div class="nav">
-                <button class="btn btn-success btn-md"><a href="{{route('main')}}">View</a></button>
-                <button class="btn btn-danger btn-md"><a href="{{route('logout')}}">Logout</a></button>
-            </div>
+            
     </header>
     <main>
         @yield('content')

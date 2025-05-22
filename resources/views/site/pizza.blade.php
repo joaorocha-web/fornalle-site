@@ -34,7 +34,7 @@
             
                 </tbody>
             </table>
-            <button class="btn btn-success mb-4"><a class="text-white" href="{{route('pizza.create')}}">Novo Sabor +</a></button>
+            <button class="btn btn-success mb-4 btn-lg"><a class="text-white" href="{{route('pizza.create')}}">Novo Sabor +</a></button>
         
     
 @endsection

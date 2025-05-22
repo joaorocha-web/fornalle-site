@@ -58,31 +58,43 @@ header{
     
 }
 
+header .logout{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    padding: 6px;
+    border-radius: 4px;
+    color: #FFF0D9;
+}
+
+header .logout:hover, .view:hover{
+    background-color: #44444476;
+}
+
+header .view{
+    position: absolute;
+    top: 55px;
+    right: 15px;
+    padding: 6px;
+    border-radius: 4px;
+    color: #FFF0D9;
+}
+
 header .header{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 20px;
 }
 
 header .header p{
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     padding: 8px;
     background-color: #0d6dfde9;
     color: var(--cor3);
     border-radius: 4px;
 }
 
-header .nav{
-    display: flex;
-    gap: 15px;
-    position: absolute;
-    bottom: 0px;
-    left: 15px;
-}
-
-header .nav a{
-    color: var(--cor3);
-}
 
 main{
     grid-area: content;
