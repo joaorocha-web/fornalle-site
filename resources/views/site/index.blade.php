@@ -16,7 +16,7 @@
                                 <p>R${{number_format($pizza->price, 2, ',', '.')}}</p>
                             </strong>
                                 <button type="submit" class="btn btn-success mb-3">
-                                    <i class="fas fa-cart-plus"></i> Adicionar
+                                    <i class="fas fa-cart-plus"></i> <a href="{{route('cart.add',['id' => $pizza->id])}}">Pedir</a>
                                 </button>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                             <strong>
                                 <p>R${{number_format($pizza->price, 2, ',', '.')}}</p>
                             </strong>
-                            <button class="btn btn-success btn-md mb-3">Pedir</button>
+                            <button class="btn btn-success btn-md mb-3"><a href="{{route('cart.add',['id' => $pizza->id])}}">Pedir</a></button>
                         </div>
                     </div>
                     </div>
@@ -63,7 +63,7 @@
                             <strong>
                                 <p>R${{number_format($pizza->price, 2, ',', '.')}}</p>
                             </strong>
-                                <button class="btn btn-success btn-md mb-3">Pedir</button>
+                                <button class="btn btn-success btn-md mb-3"><a href="{{route('cart.add',['id' => $pizza->id])}}">Pedir</a></button>
                         </div>
                     </div>
                     </div>
@@ -71,7 +71,12 @@
             @endforeach
         </div>
     </section>
-    
+    <div class="cart">
+            <div class="ico-Cart">
+                <a href="{{route('cart.show')}}"><i class="bi bi-cart-plus "></i></a>
+                <div class="qtd">1</div>
+            </div>
+        </div>
     
         
         

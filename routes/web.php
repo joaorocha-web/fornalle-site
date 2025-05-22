@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -37,10 +38,13 @@ Route::prefix('pizza')->group(function(){
 
 Route::get('/create', [PizzaController::class, 'create'])->name('pizza.create');
 Route::get('/{id}/edit', [PizzaController::class, 'edit'])->where('id','[0-9]+')->name('pizza.edit');
-
 Route::put('/{id}', [PizzaController::class, 'update'])->where('id','[0-9]+')->name('pizza.update');
-
 Route::delete('/{id}', [PizzaController::class, 'destroy'])->where('id','[0-9]+')->name('pizza.destroy');
+
+
+Route::get('/cart/{id}', [CartController::class, 'add'])->where('id', '[0-9]+')->name('cart.add');
+Route::get('/cart', [CartController::class, 'show'])->where('id', '[0-9]+')->name('cart.show');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->where('id', '[0-9]+')->name('cart.remove');
 
 
 
