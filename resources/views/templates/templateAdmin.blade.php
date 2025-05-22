@@ -18,7 +18,12 @@
             <p>Área administrativa</p> 
             
     </header>
+    <nav class="nav">
+            <a href="{{route('pizza.index')}}">Cadastro de Pizzas</a>
+            <a href="{{route('adm.register')}}">Cadastro de Adm</a>
+    </nav>
     <main>
+        
         @yield('content')
     </main>
     <footer>

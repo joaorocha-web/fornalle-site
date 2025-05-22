@@ -22,9 +22,9 @@
                 <i class="bi bi-list" id="close-menu"></i>
             </div>
             <ul id="links">
-                @if (auth()->user())
+                @if (auth()->user() && auth()->user()->is_admin)
                 <li><a href="{{route('pizza.index')}}">Area Adm</a></li>    
-                @else
+                @elseif(!auth()->user())
                 <li><a href="{{route('login')}}">Entrar</a></li>   
                 @endif               
                 <li><a href="#sweet">Doces</a></li>

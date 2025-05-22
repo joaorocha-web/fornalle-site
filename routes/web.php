@@ -27,6 +27,8 @@ Route::post('/login', [LoginController::class, 'validation'])->name('verifyLogin
 
 Route::get('/users', [UserController::class , 'register'])->name('user.register');
 Route::post('/users', [UserController::class , 'store'])->name('user.store');
+Route::get('/adm', [UserController::class , 'registerAdm'])->name('adm.register');
+Route::post('/adm', [UserController::class , 'storeAdm'])->name('adm.store');
 
 Route::prefix('pizza')->group(function(){
     Route::get('/', [PizzaController::class, 'index'])->name('pizza.index');

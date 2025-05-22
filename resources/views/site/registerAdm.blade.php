@@ -1,9 +1,13 @@
-@extends('templates.templateLogin') 
-@section('title', 'cadastro de usúario')
-@section('content')
-   <div class="form-box">
-        <h1 class="text-center">Crie sua conta:</h1>
-        <form action="{{route('user.store')}}" method="post">
+   @extends('templates.templateAdmin') 
+   @section('title', 'cadastro')
+   @section('content')
+   
+    <div class="container mt-3">
+        <div class=" row">
+        
+            <h3 class="text-center text-black">Cadastro de Administrador:</h3>
+            <p class="text-danger text-center">Tal cadastro dará permissão total ao usuário</p>
+        <form action="{{route('adm.store')}}" method="post">
             @csrf
              
             <div class="form-group">
@@ -28,7 +32,7 @@
             </div>
             <button class="btn btn-success mt-4 form-control">Criar</button>
         </form>
-   </div>
+        </div>
+    </div>
 
-
-@endsection
+    @endsection
