@@ -11,7 +11,25 @@ body{
 
 .card{
     box-shadow: 4px 5px 15px #000 ;;
-    width: 400px;
+    width: 70vw;
+}
+
+.form-box{
+    width: 85vw;
+    padding: 20px;
+    border: 1px solid green;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+@media (min-width: 900px){
+    .form-box{
+        width: 580px;
+    }
+
+    .card{
+        width: 400px;
+    }
 }
 
 
