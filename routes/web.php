@@ -20,7 +20,9 @@ use App\Models\Pizza;
 
 Route::get('/', function(){
     $pizzas = Pizza::all();
-    return view('site.index', ['pizzas' => $pizzas]);
+    $categories = ['Tradicional', 'Doce', 'Especial'];
+    
+    return view('site.index', ['pizzas' => $pizzas, 'categories' => $categories]);
 })->name('main');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -39,10 +41,10 @@ Route::prefix('pizza')->group(function(){
 Route::get('/create', [PizzaController::class, 'create'])->name('pizza.create');
 Route::get('/{id}/edit', [PizzaController::class, 'edit'])->where('id','[0-9]+')->name('pizza.edit');
 Route::put('/{id}', [PizzaController::class, 'update'])->where('id','[0-9]+')->name('pizza.update');
-Route::delete('/{id}', [PizzaController::class, 'destroy'])->where('id','[0-9]+')->name('pizza.destroy');
+Route::delete('/pizza/{pizza}', [PizzaController::class, 'destroy'])->name('pizza.destroy');
 
 
-Route::get('/cart/{id}', [CartController::class, 'add'])->where('id', '[0-9]+')->name('cart.add');
+Route::post('/cart/{id}', [CartController::class, 'add'])->where('id', '[0-9]+')->name('cart.add');
 Route::get('/cart', [CartController::class, 'show'])->where('id', '[0-9]+')->name('cart.show');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->where('id', '[0-9]+')->name('cart.remove');
 

@@ -126,15 +126,6 @@ class PizzaController extends Controller
 
     return redirect()->route("pizza.index")->with('success', 'Pizza atualizada com sucesso!');
         
-        //  $data = [
-        //     'name' => $request->name,
-        //     'description' => $request->description,
-        //     'price' => $request->price,
-        //     'category' => $request->category,
-        //     'status' => $request->status,
-        // ];
-        // Pizza::where('id', $id)->update($data);
-        // return redirect()->route("pizza.index");
     }
 
     /**
@@ -142,16 +133,20 @@ class PizzaController extends Controller
      */
     public function destroy(string $id)
     {
+    try {
         $pizza = Pizza::findOrFail($id);
-    
-    // Remove a imagem do storage se existir
-    if ($pizza->image_url && Storage::exists($pizza->image_url)) {
-        Storage::delete($pizza->image_url);
+        $pizza->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pizza excluída com sucesso'
+        ]);
+        
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Erro: ' . $e->getMessage()
+        ], 500);
     }
-    
-    // Deleta o registro do banco de dados
-    $pizza->delete();
-    
-    return redirect()->route("pizza.index")->with('success', 'Pizza removida com sucesso!');
     }
 }

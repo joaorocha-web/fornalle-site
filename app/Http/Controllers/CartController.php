@@ -37,25 +37,63 @@ class CartController extends Controller
         ];
         }
         session()->put('cart', $cart);
-        $total = session()->get('total');
-        $total++;
+
+
+        $total = array_sum(array_column($cart, 'quantity'));
         session()->put('total', $total);
-        return redirect()->route('main');
+
+
+         return response()->json([
+        'success' => true,
+        'total' => $total,
+        'cart' => $cart
+         ]);
         
    }
 
-   public function remove($id){
+
     
-    $cart = session()->get('cart');
-    if(isset($cart[$id]) && $cart[$id]['quantity'] > 1){
-        $cart[$id]['quantity']-=1;
-    }else{
-        unset($cart[$id]);
+   public function remove($id)
+{
+    try {
+        $cart = session()->get('cart', []);
+        $responseData = [];
+
+        if (!isset($cart[$id])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Item não encontrado no carrinho'
+            ], 404);
+        }
+
+        if ($cart[$id]['quantity'] > 1) {
+            $cart[$id]['quantity']--;
+            $responseData['quantity'] = $cart[$id]['quantity'];
+        } else {
+            unset($cart[$id]);
+            $responseData['quantity'] = 0;
+        }
+
+        // Calcula o total corretamente
+        $total = 0;
+        foreach ($cart as $item) {
+            $total += $item['price'] * $item['quantity'];
+        }
+
+        session()->put('total', $total);
+        session()->put('cart', $cart);
+
+        return response()->json([
+            'success' => true,
+            'total' => $total,
+            'quantity' => $responseData['quantity'] ?? 0
+        ]);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Erro interno: ' . $e->getMessage()
+        ], 500);
     }
-    $total = session()->get('total');
-    $total--;
-    session()->put('total', $total);
-    session()->put('cart', $cart);
-    return redirect()->route('cart.show');
-   }
+}
 }

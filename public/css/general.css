@@ -217,20 +217,29 @@ main .cart .ico-Cart .qtd{
     z-index: 100;
 }
 
-main #traditional{
+main .category-Tradicional{
     padding: 50px 5px;
 }
 
-main #sweet{
+main .category-Doce{
     padding: 50px 5px;
     background-color: #4b2800;
     color: #fff;
 }
 
-main #special{
+main .category-Especial{
     padding: 50px 5px;
     background-color: #000;
     color: #fff;
+}
+
+.Doce{
+     background-color: #4b2800;       
+}
+
+.Especial{
+    background-color:#121212;
+   
 }
 
 main .pizzas{
@@ -320,6 +329,10 @@ main .pizza .description  div p{
     flex: 1;
 }
 
+.valor-total{
+    font-size: 1.2rem;
+}
+
 .cancel{
     margin-left: 15px;
     padding: 4px;
@@ -353,4 +366,16 @@ main .pizza .description  div p{
 footer{
     grid-area: footer;
     background-color: var(--cor1);
+}
+
+.toast-message {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    background: var(--cor2);
+    color: var(--cor3);
+    padding: 15px 25px;
+    border-radius: 4px;
+    animation: slideIn 0.6s, fadeOut 0.3s 2.5s forwards;
+    z-index: 1000;
 }

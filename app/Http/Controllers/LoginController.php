@@ -22,9 +22,16 @@ class LoginController extends Controller
         
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect()->route('pizza.index');
+            // // return redirect()->route('pizza.index');
+            $login['success'] = true;
+            echo json_encode($login);
+            return;
         }else{
-            return redirect()->back()->with('error', 'Usuário Inválido');
+            // return redirect()->back()->with('error', 'Usuário Inválido');
+            $login['success'] = false;
+            $login['message'] = "Usuário Inválido";
+            echo json_encode($login);
+            return;
         }
         
     }
