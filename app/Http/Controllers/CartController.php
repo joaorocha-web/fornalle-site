@@ -15,8 +15,8 @@ class CartController extends Controller
         }
         
         $totalFormated = number_format($total, 2, ',','.');
-        if($total == 0){
-            return redirect()->route('main');
+        if($total === 0){
+            return redirect()->route('main')->with('error', 'Seu carrinho está vazio.');
         }
         return view('site.cart', [
             'cart' => $cart,
@@ -37,7 +37,9 @@ class CartController extends Controller
         ];
         }
         session()->put('cart', $cart);
-
+        $total = session()->get('total');
+        $total++;
+        session()->put('total', $total);
         return redirect()->route('main');
         
    }
@@ -50,7 +52,9 @@ class CartController extends Controller
     }else{
         unset($cart[$id]);
     }
-
+    $total = session()->get('total');
+    $total--;
+    session()->put('total', $total);
     session()->put('cart', $cart);
     return redirect()->route('cart.show');
    }

@@ -37,20 +37,26 @@ class PizzaController extends Controller
             'category' => 'required',
             'description' => 'required|max:100',
             'price' => 'required|numeric|min:0',
-            'image_url' => 'required|image',
+            'image_url' => 'sometimes|image',
         ]);
 
-        $fileName = rand(0, 99) . '-' . $request->file('image_url')->getClientOriginalName();
-        $path = $request->file('image_url')->storeAs('pizza_images', $fileName);
+         $pizza = new Pizza();
+         
+        if(isset($request->file)){
+            $fileName = rand(0, 99) . '-' . $request->file('image_url')->getClientOriginalName();
+            $path = $request->file('image_url')->storeAs('pizza_images', $fileName);
+            $pizza->image_url = $path;
+        }
+        
       
 
-        $pizza = new Pizza();
+       
         $pizza->name = $request->name;
         $pizza->category = $request->category;
         $pizza->description = $request->description;
         $pizza->price = $request->price;
         $pizza->status = $request->status;
-        $pizza->image_url = $path;
+       
         $pizza->save();
 
         return redirect()->route("pizza.index");

@@ -20,6 +20,7 @@
                     </form>
                   </div>
                   
+                  
                 @endforeach
                 <p><strong>Total: R${{$total}}</strong></p>
                 <a class="back" href="{{route('main')}}">Voltar</a>

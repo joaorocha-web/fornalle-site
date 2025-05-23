@@ -36,7 +36,9 @@
             <h1>Fornalle Tratoria</h1>
             <p>Um pedaço da Itália perto de você</p> 
         </div>  
-          
+        @if (session('error'))
+          <div class="error">{{session('error')}}</div>
+        @endif
     </header>
     <main>
         

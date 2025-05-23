@@ -40,7 +40,7 @@
                             <strong>
                                 <p>R${{number_format($pizza->price, 2, ',', '.')}}</p>
                             </strong>
-                            <button class="btn btn-success btn-md mb-3"><a href="{{route('cart.add',['id' => $pizza->id])}}">Pedir</a></button>
+                            <button class="btn btn-success btn-md mb-3" name="teste"><a href="{{route('cart.add',['id' => $pizza->id])}}">Pedir</a></button>
                         </div>
                     </div>
                     </div>
@@ -56,6 +56,7 @@
                 @if ($pizza->category === 'Especial' && $pizza->status === 'ativo')
                     <div class="pizza">
                     <img class="img-pizza" src="{{asset("storage/{$pizza->image_url}")}}" alt="">
+
                     <div class="description">
                         <h3>{{$pizza->name}}</h3>
                         <p>{{$pizza->description}}</p>
@@ -74,13 +75,12 @@
     <div class="cart">
             <div class="ico-Cart">
                 <a href="{{route('cart.show')}}"><i class="bi bi-cart-plus "></i></a>
-                <div class="qtd">1</div>
+                <div class="qtd">
+                    {{session()->get('total', 0)}}
+                </div>
             </div>
         </div>
-    
+
         
-        
-        
-            
-    
+
 @endsection
