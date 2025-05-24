@@ -6,7 +6,7 @@
         <section class="category-{{$category}}">
             <h2>{{$category}}</h2>
             <div class="pizzas">
-                @foreach ($pizzas->where('category', $category) as $pizza)
+                @foreach ($pizzas->where('category', $category)->where('status' , 'ativo') as $pizza)
                 
                         <div class="pizza {{$category}}">
                         <img class="img-pizza" src="{{asset("storage/{$pizza->image_url}")}}" alt="">
