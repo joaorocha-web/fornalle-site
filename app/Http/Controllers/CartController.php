@@ -75,9 +75,14 @@ class CartController extends Controller
         }
 
         // Calcula o total corretamente
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            $totalPrice += $item['price'] * $item['quantity'];
+        }
+
         $total = 0;
         foreach ($cart as $item) {
-            $total += $item['price'] * $item['quantity'];
+            $total +=  $item['quantity'];
         }
 
         session()->put('total', $total);
@@ -85,7 +90,7 @@ class CartController extends Controller
 
         return response()->json([
             'success' => true,
-            'total' => $total,
+            'total' => $totalPrice,
             'quantity' => $responseData['quantity'] ?? 0
         ]);
 
