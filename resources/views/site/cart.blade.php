@@ -33,7 +33,7 @@
                 @endforeach
                 <p><strong class="valor-total">Total: R$<span id="cart-total">{{$total}}</span></strong></p>
                 <a class="back" href="{{route('main')}}">Voltar</a>
-                <a class="order" href="{{route('main')}}"> Finalizar  Pedido</a>
+                <a class="order" href="{{route('checkout.form')}}"> Finalizar  Pedido</a>
             </div>
         </div>
 

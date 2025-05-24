@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,8 @@ Route::delete('/pizza/{pizza}', [PizzaController::class, 'destroy'])->name('pizz
 Route::post('/cart/{id}', [CartController::class, 'add'])->where('id', '[0-9]+')->name('cart.add');
 Route::get('/cart', [CartController::class, 'show'])->where('id', '[0-9]+')->name('cart.show');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->where('id', '[0-9]+')->name('cart.remove');
+
+Route::get('/checkout', [CheckOutController::class, 'showCheckoutForm'])->name('checkout.form');
 
 
 
