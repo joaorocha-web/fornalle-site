@@ -51,5 +51,6 @@ class CheckOutController extends Controller
             
         });
         return redirect()->route('main');
+        
     }
 }
