@@ -44,7 +44,7 @@ class UserController extends Controller
     public function storeAdm(Request $request){
         $user = $request->all();
         $user['password'] = bcrypt($request->password);
-        $user['is_admin'] = true;
+        $user['role'] = 'admin';
 
         User::create($user);
     }

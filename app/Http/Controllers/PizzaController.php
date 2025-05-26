@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Pizza;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Middleware\Authorize;
 
 class PizzaController extends Controller
 {
@@ -13,9 +15,9 @@ class PizzaController extends Controller
      */
     public function index()
     {
+        $this->authorize('area-admin');
         $pizzas = \App\Models\Pizza::all();
-        return view('site.pizza', ['pizzas' => $pizzas]);
-       
+        return view('site.pizza', ['pizzas' => $pizzas]); 
         
     }
 
@@ -133,7 +135,13 @@ class PizzaController extends Controller
      */
     public function destroy(string $id)
     {
-    try {
+         if (!Gate::allows('manager-access')) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Acesso negado'
+        ], 403);
+    }
+        try {
         $pizza = Pizza::findOrFail($id);
         $pizza->delete();
 
