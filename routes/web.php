@@ -50,6 +50,7 @@ Route::get('/cart', [CartController::class, 'show'])->where('id', '[0-9]+')->nam
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->where('id', '[0-9]+')->name('cart.remove');
 
 Route::get('/checkout', [CheckOutController::class, 'showCheckoutForm'])->name('checkout.form');
+Route::post('/checkout', [CheckOutController::class, 'finishCheckout'])->name('checkout.finish');
 
 
 

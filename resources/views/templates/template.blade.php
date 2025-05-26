@@ -23,11 +23,12 @@
                 <i class="bi bi-list" id="close-menu"></i>
             </div>
             <ul id="links">
-                {{-- @can('area-admin') --}}
-                <li><a href="{{route('pizza.index')}}">Area Adm</a></li>    
-                {{-- @elseif(!auth()->user()) --}}
+                @can('area-admin')
+                <li><a href="{{route('pizza.index')}}">Area Adm</a></li> 
+                @endcan   
+                @if(!auth()->user())
                 <li><a href="{{route('login')}}">Entrar</a></li>   
-                {{-- @endcan                --}}
+                @endif               
                 <li><a href="#sweet">Doces</a></li>
                 <li><a href="#special">Especiais</a></li>
             </ul>
