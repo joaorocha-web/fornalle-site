@@ -17,7 +17,7 @@ class PizzaController extends Controller
     {
         $this->authorize('area-admin');
         $pizzas = \App\Models\Pizza::all();
-        return view('site.pizza', ['pizzas' => $pizzas]); 
+        return view('admin.pizza', ['pizzas' => $pizzas]); 
         
     }
 
@@ -26,7 +26,7 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        return view('site.register');
+        return view('admin.register');
     }
 
     /**
@@ -81,7 +81,7 @@ class PizzaController extends Controller
     {
         
         $pizza = Pizza::where('id', $id)->first();
-        if($pizza) return view('site.edit', ['pizza' => $pizza]);
+        if($pizza) return view('admin.edit', ['pizza' => $pizza]);
         
 
         return redirect()->route("pizza.index");   

@@ -1,6 +1,7 @@
 @extends('templates.templateLogin') 
 @section('title', 'cadastro de usúario')
 @section('content')
+
     <div class="card">
         <div class="card-header p-2 d-flex justify-content-center "><h1>Login</h1></div>
         <div class="card-body">

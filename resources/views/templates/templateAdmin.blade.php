@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/admin.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    
     <title>@yield('title')</title>
 </head>
 <body>
@@ -16,11 +18,11 @@
              <a class="logout" href="{{route('logout')}}"><i class="bi bi-box-arrow-right"></i> Sair</a>
              <a class="view" href="{{route('main')}}"><i class="bi bi-eye"></i> View</a>
             <h1>Fornalle Tratoria</h1>
-            <p>Área administrativa</p> 
             
     </header>
     <nav class="nav">
             <a href="{{route('pizza.index')}}">Cadastro de Pizzas</a>
+            <a href="{{route('admin.dashboard')}}">Relatórios</a>
             <a href="{{route('adm.register')}}">Cadastro de Adm</a>
     </nav>
     <main>

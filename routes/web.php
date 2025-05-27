@@ -5,8 +5,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Pizza;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,12 @@ Route::get('/create', [PizzaController::class, 'create'])->name('pizza.create');
 Route::get('/{id}/edit', [PizzaController::class, 'edit'])->where('id','[0-9]+')->name('pizza.edit');
 Route::put('/{id}', [PizzaController::class, 'update'])->where('id','[0-9]+')->name('pizza.update');
 Route::delete('/pizza/{pizza}', [PizzaController::class, 'destroy'])->name('pizza.destroy');
+
+
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/dashboardPizzas', [DashboardController::class, 'bestSellers'])->name('pizza.dashboard');
+ 
+
 
 
 Route::post('/cart/{id}', [CartController::class, 'add'])->where('id', '[0-9]+')->name('cart.add');

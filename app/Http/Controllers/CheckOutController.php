@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 class CheckOutController extends Controller
 {
     public function showCheckoutForm(){
+        if(!auth()->user()) return view('site.login')->with('error', 'Você precisa logar primeiro');
         return view('site.checkout');
     }
 

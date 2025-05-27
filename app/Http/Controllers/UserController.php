@@ -38,7 +38,7 @@ class UserController extends Controller
     }
 
     public function registerAdm(){
-        return view('site.registerAdm');
+        return view('admin.registerAdm');
     }
 
     public function storeAdm(Request $request){

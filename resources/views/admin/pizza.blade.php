@@ -1,40 +1,42 @@
 @extends('templates.templateAdmin')
 @section('title', 'Pizzas')
 @section('content')
-        <h2>Tabela de Pizzas Cadastradas</h2>
-        
-            <table class="table table-hover table-bordered table-striped m-3">
-                <thead>
-                    <th>Sabor</th>
-                    <th>Descrição</th>
-                    <th>Valor</th>
-                    <th>Categoria</th>
-                    <th>Status</th>
-                    <th>Alterar/delete</th>
-                </thead>
-                <tbody>
-                    @foreach ($pizzas as $pizza)
-                        <tr>
-                            <td>{{$pizza->name}}</td>
-                            <td class="reticence">{{$pizza->description}}</td>
-                            <td>R$ {{number_format($pizza->price, 2, ",", ".")}}</td>
-                            <td>{{$pizza->category}}</td>
-                            <td>{{$pizza->status}}</td>
-                            <td class="d-flex">
-                                <a class="btn btn-outline-primary btn-sm me-3" href="{{route('pizza.edit' , ['id' => $pizza->id])}}"><i class="bi bi-pencil"></i></a>
-                                <button class="btn btn-outline-danger btn-sm ml-2 delete-btn" 
-                                        data-id="{{ $pizza->id }}" 
-                                        data-url="{{ route('pizza.destroy', ['pizza' => $pizza->id]) }}">
-                                    <i class="bi bi-trash3"></i>
-                                </button>
-                            </td>
-                            
-                        </tr>
-                    @endforeach
+        <div class="margin m-4">
+            <h2>Tabela de Pizzas Cadastradas</h2>
             
-                </tbody>
-            </table>
-            <button class="btn btn-success mb-4 btn-lg"><a class="text-white" href="{{route('pizza.create')}}">Novo Sabor +</a></button>
+                <table class="table table-hover table-bordered table-striped m-3">
+                    <thead>
+                        <th>Sabor</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Categoria</th>
+                        <th>Status</th>
+                        <th>Alterar/delete</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($pizzas as $pizza)
+                            <tr>
+                                <td>{{$pizza->name}}</td>
+                                <td class="reticence">{{$pizza->description}}</td>
+                                <td>R$ {{number_format($pizza->price, 2, ",", ".")}}</td>
+                                <td>{{$pizza->category}}</td>
+                                <td>{{$pizza->status}}</td>
+                                <td class="d-flex">
+                                    <a class="btn btn-outline-primary btn-sm me-3" href="{{route('pizza.edit' , ['id' => $pizza->id])}}"><i class="bi bi-pencil"></i></a>
+                                    <button class="btn btn-outline-danger btn-sm ml-2 delete-btn"
+                                            data-id="{{ $pizza->id }}"
+                                            data-url="{{ route('pizza.destroy', ['pizza' => $pizza->id]) }}">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
+                                </td>
+            
+                            </tr>
+                        @endforeach
+            
+                    </tbody>
+                </table>
+                <button class="btn btn-success mb-4 btn-lg"><a class="text-white" href="{{route('pizza.create')}}">Novo Sabor +</a></button>
+        </div>
             
             <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>

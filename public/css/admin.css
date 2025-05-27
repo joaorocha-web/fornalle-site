@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root{
-    --cor1: #BD3537;
+    --cor1: #42223D;
     --cor2: #0E7D4F;
     --cor3: #FFF0D9; 
     --fonteTitulo: "Cinzel Decorative"; 
@@ -26,6 +26,7 @@ h1{
     font-size: 3rem;
     text-shadow: 2px 2px 5px rgb(0, 0, 0);
     color: var(--cor3);
+    font-weight: 700;
 }
 
 h2{
@@ -52,7 +53,7 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../images/principal-900px-escuro.jpeg);
+    background-image: url(../images/admin.jpg);
     background-position:top center;
     background-size: cover;
     
@@ -111,7 +112,7 @@ header .header p{
 }
 
 .nav a:hover{
-    background-color: #bbbbbb44;
+    background-color: var(--cor1);
 }
 
 
@@ -121,7 +122,38 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px 40px;
+    
+}
+
+div.dashboard{
+    padding: 15px;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 200px 1fr;
+    grid-template-areas: "buttons report" ;
+    background-color: #F5F5F5;
+    color: #fff;
+}
+
+div.buttons{
+    grid-area: buttons;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+    
+}
+
+div.report-container{
+    grid-area: report;
+}
+
+div.report-container h3{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 footer{
