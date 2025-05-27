@@ -1,7 +1,7 @@
 
-    @foreach ($pizzasBestSellers as $item)
+    @foreach ($bestClients as $client)
         <div class="item">
-            <p><span class="pizza-name">{{$item->pizza->name}}:</span> Vendidas- {{$item->total}}</p>
+            <p><span class="pizza-name">{{$client->user->name}}:</span> Vendidas- {{$client->total}}</p>
         </div>
     @endforeach
 

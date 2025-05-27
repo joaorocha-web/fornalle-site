@@ -1,7 +1,18 @@
 @extends('templates.templateAdmin')
 @section('title', 'Pizzas')
 @section('content')
-        <div class="margin m-4">
+<style>
+    table {
+        position: relative; /* Importante para o sticky funcionar */
+        }
+
+    thead {
+        position: sticky;
+        top: 0;
+    }
+
+</style>
+        <div class="margin m-5">
             <h2>Tabela de Pizzas Cadastradas</h2>
             
                 <table class="table table-hover table-bordered table-striped m-3">
@@ -35,7 +46,7 @@
             
                     </tbody>
                 </table>
-                <button class="btn btn-success mb-4 btn-lg"><a class="text-white" href="{{route('pizza.create')}}">Novo Sabor +</a></button>
+                <button class="btn btn-success mb-4 btn-md"><a class="text-white" href="{{route('pizza.create')}}">Novo Sabor +</a></button>
         </div>
             
             <script src="https://code.jquery.com/jquery-3.7.1.js"></script>

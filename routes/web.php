@@ -49,6 +49,7 @@ Route::delete('/pizza/{pizza}', [PizzaController::class, 'destroy'])->name('pizz
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/dashboardPizzas', [DashboardController::class, 'bestSellers'])->name('pizza.dashboard');
+Route::get('/admin/reports/{type}', [DashboardController::class, 'showReport']);
  
 
 

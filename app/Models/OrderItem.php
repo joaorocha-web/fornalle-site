@@ -29,7 +29,7 @@ class OrderItem extends Model
     // OrderItem.php
     public static function getBestSellers()
     {
-          return Cache::remember('best-sellers', now()->addHours(2), function() {
+        return Cache::remember('best-sellers', now()->addHours(2), function() {
         return self::selectRaw('pizza_id, SUM(quantity) as total')
             ->with('pizza')
             ->whereHas('pizza') // Garante que só traz pizzas existentes
