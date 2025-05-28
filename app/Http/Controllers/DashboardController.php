@@ -23,11 +23,7 @@ class DashboardController extends Controller
         if($type === 'pizzas'){
             $pizzasBestSellers = OrderItem::getBestSellers();
             return view("admin.reports.{$type}", ['pizzasBestSellers' =>  $pizzasBestSellers ]);
-        }elseif($type === 'clients'){
-            $bestClients = Order::getBestClients();
-            return view("admin.reports.{$type}", ['bestClients' =>  $bestClients ]);
         }
-
     
     }
 

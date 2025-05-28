@@ -18,11 +18,10 @@
     
     
     <div class="report-container" >
-        <div class="card" id="report-container">
+        <div id="report-container">
                 
                 
         </div>
-        {{-- @include('admin.reports.pizzas') --}}
     </div>
 </div>
 

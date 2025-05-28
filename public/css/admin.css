@@ -130,9 +130,9 @@ div.dashboard{
     width: 100%;
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 260px 1fr ;
     z-index: 1;
-    grid-template-areas: "buttons report" ;
+    grid-template-areas: "buttons report";
     gap: 40px;
     background-color: #F5F5F5;
     color: #fff;
@@ -155,18 +155,36 @@ div.buttons{
     color: white;
 }
 
-div.report-container{
-    grid-area: report;
-    display: flex;
-    justify-content: center;
-    padding-top: 30px;
+.dashboard-resume{
+    grid-area: resume;
+    background-color: 	#7C4DFF;
+    border: 1px solid rgba(0, 0, 0, 0.183);
+    margin-top: 30px;
+    box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.094);
+    border-radius: 10px;
 }
 
-div.report-container .card{
-    width: 60%;
-    height: 80%;
+
+ .grafic{
+    grid-area: grafic;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.183);
+    margin-top: 30px;
+    margin-right: 40px;
     box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.094);
-    padding: 30px 15px;
+    border-radius: 10px;
+}
+
+
+div.report-container{
+    grid-area: report;
+    margin-right: 40px;
+}
+
+ 
+div.report-container #report-container{
+    margin-bottom: 30px;
+   
 }
 
 div.report-container h3{

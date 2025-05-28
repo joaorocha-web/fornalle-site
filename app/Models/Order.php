@@ -29,16 +29,6 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-     public static function getBestClients()
-    {
-        
-        return self::selectRaw('user_id, SUM(total) as total')
-            ->with('users')
-            ->whereHas('users') // Garante que só traz pizzas existentes
-            ->groupBy('user_id')
-            ->orderByDesc('total')
-            ->limit(2)
-            ->get();
-    }
+    
     
 }
