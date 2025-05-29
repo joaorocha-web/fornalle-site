@@ -8,15 +8,27 @@
         <div class="btn btn-outline-primary" data-report="pizzas">
             Pizzas mais vendidas
         </div>
-        <div class="btn btn-outline-primary" data-report="clients">
-            Clientes mais ativos
+        <div class="btn btn-outline-primary" >
+            --------
         </div>
-        <div class="btn btn-outline-primary" data-report="pizzas">
-            Regiões Ativas
+        <div class="btn btn-outline-primary" >
+            --------
+        </div>
+        <div class="btn btn-outline-primary" >
+            --------
+        </div>
+        <div class="btn btn-outline-primary" >
+            --------
+        </div>
+        <div class="btn btn-outline-primary" >
+            --------
+        </div>
+        <div class="btn btn-outline-primary" >
+            --------
         </div>
     </div>
     
-    
+    <canvas id="screen" width="200" height="200"></canvas>
     <div class="report-container" >
         <div id="report-container">
                 
