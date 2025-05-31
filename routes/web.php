@@ -61,7 +61,9 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->where('id
 Route::get('/checkout', [CheckOutController::class, 'showCheckoutForm'])->name('checkout.form');
 Route::post('/checkout', [CheckOutController::class, 'finishCheckout'])->name('checkout.finish');
 
-
+Route::get('teste', function(){
+   return view('teste.teste');
+});
 
 
 

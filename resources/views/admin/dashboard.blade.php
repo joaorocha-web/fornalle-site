@@ -28,7 +28,7 @@
         </div>
     </div>
     
-    <canvas id="screen" width="200" height="200"></canvas>
+    
     <div class="report-container" >
         <div id="report-container">
                 
