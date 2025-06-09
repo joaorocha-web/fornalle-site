@@ -20,169 +20,38 @@
         
         }
     </style>
+    
 </head>
 <body>
     <canvas id="screen" width="10" height="10"></canvas>
     
 
-    <script>
+    <script type="module">
+        import createKeyboardListener from '/js/keyboard-listener.js'
+        import createGame from '/js/create-game.js'
+        import renderScreen from '/js/render-screen.js'
         const screen = document.getElementById('screen')
-        const ctx = screen.getContext('2d')
         const currentPlayerId = 'player1'
 
-        function createGame(){
-            const state = {
-                players: {},
-                fruits: {} 
-            }
-
-            function addPlayer(command){
-                const playerId = command.playerId
-                const playerX = command.playerX
-                const playerY = command.playerY
-
-                state.players[playerId] = {
-                    x: playerX,
-                    y: playerY
-                }
-            }
-
-            function removePlayer(command){
-                const playerId = command.playerId
-                
-                delete state.players[playerId]
-            }
-
-            function addFruit(command){
-                const fruitId = command.fruitId
-                const fruitX = command.fruitX
-                const fruitY = command.fruitY
-
-                state.fruits[fruitId] = {
-                    x: fruitX,
-                    y: fruitY
-                }
-            }
-
-            function removeFruit(command){
-                const fruitId = command.fruitId
-
-                delete state.fruits[fruitId]
-            }
-
-            function movePlayer(command){
-                console.log(`Moving ${command.playerId} with ${command.keyPressed}`)
-
-                const acceptedMoves = {
-                    ArrowUp(player) {
-                        console.log(`Moving player up`)
-                        if(player.y - 1 >=0){
-                            player.y = player.y - 1
-                        }       
-                    },
-                    ArrowDown(player) {
-                        console.log(`Moving player down`)
-                        if(player.y + 1 <=9){
-                            player.y = player.y + 1
-                        }
-                    },
-                    ArrowLeft(player) {
-                        console.log(`Moving player left`)
-                        if(player.x - 1 >=0){
-                             player.x = player.x - 1
-                        }
-                    },
-                    ArrowRight(player) {
-                        console.log(`Moving player right`)
-                        if(player.x + 1 <=9){
-                            player.x = player.x + 1
-                        }
-                    }
-                }
-
-                const keyPressed = command.keyPressed
-                const player = state.players[command.playerId]
-                const moveFunction = acceptedMoves[keyPressed]
-                
-                if(moveFunction){
-                    moveFunction(player)
-                }
-                return
-
-            }
-
-            return {
-                addFruit, 
-                removeFruit,
-                addPlayer,
-                removePlayer,
-                movePlayer,
-                state
-            }
-        }
+        
 
         const game = createGame()
-        const keyboardListener = createKeyboardListener()
+        const keyboardListener = createKeyboardListener(document)
         keyboardListener.subscribe(game.movePlayer)
 
-        function createKeyboardListener(){
-            const state = {
-                observers: []
-            }
+        game.addPlayer({playerId:'player1', playerX: 4, playerY: 2})
+        game.addPlayer({playerId:'player2', playerX: 1, playerY: 3})
+        game.addPlayer({playerId:'player3', playerX: 8, playerY: 0})
+        game.addFruit({fruitId:'fruit1', fruitX: 5, fruitY: 7})
+        game.addFruit({fruitId:'fruit2', fruitX: 3, fruitY: 9})
 
-            function subscribe(observerFunction){
-                state.observers.push(observerFunction)
-            }
-
-            function notifyAll(command){
-                console.log(`Notifying ${state.observers.length} observers`)
-
-                for(const observerFunction of state.observers){
-                    observerFunction(command)
-                }
-            }
-
-            document.addEventListener('keydown', handleKeydown)
-
-            function handleKeydown(event){
-                const keyPressed = event.key
-
-                const command = {
-                    playerId: 'player1',
-                    keyPressed
-                }
-
-                notifyAll(command)
-                
-            }
-
-            return{
-                subscribe
-            }
-        }
 
 
        
 
-        renderGame()
+        renderScreen(screen, game, requestAnimationFrame)
 
-        function renderGame(){
-            ctx.fillStyle = 'white'
-            ctx.clearRect(0,0, 10, 10)
-            for(const playerId in game.state.players){
-                const player = game.state.players[playerId]
-                ctx.fillStyle = 'black'
-                ctx.fillRect(player.x, player.y, 1 ,1)
-            }
-            for(const fruitId in game.state.fruits){
-                const fruit = game.state.fruits[fruitId]
-                ctx.fillStyle = 'green'
-                ctx.fillRect(fruit.x, fruit.y, 1,1)
-            }
-
-            requestAnimationFrame(renderGame)
-        }
-
+        
         
     </script>
 </body>

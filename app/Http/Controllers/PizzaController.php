@@ -104,20 +104,19 @@ class PizzaController extends Controller
 
     $pizza = Pizza::findOrFail($id);
 
-    // Verifica se uma nova imagem foi enviada
+   
     if ($request->hasFile('image_url')) {
-        // Remove a imagem antiga se existir
+        
         if ($pizza->image_url && Storage::exists($pizza->image_url)) {
             Storage::delete($pizza->image_url);
         }
 
-        // Faz upload da nova imagem (mesma lógica do store)
+       
         $fileName = rand(0, 99) . '-' . $request->file('image_url')->getClientOriginalName();
         $path = $request->file('image_url')->storeAs('pizza_images', $fileName);
         $pizza->image_url = $path;
     }
 
-    // Atualiza os outros campos
     $pizza->name = $request->name;
     $pizza->category = $request->category;
     $pizza->description = $request->description;
