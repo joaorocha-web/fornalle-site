@@ -14,7 +14,7 @@ class DashboardController extends Controller
         return view('admin.dashboard'); // View principal sem dados
     }
     
-    public function bestSellers(){
+    public function showBestSellers(){
         $pizzasBestSellers = OrderItem::getBestSellers();
         return $pizzasBestSellers;
     }
