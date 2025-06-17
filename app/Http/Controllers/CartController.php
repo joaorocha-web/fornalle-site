@@ -22,16 +22,16 @@ class CartController extends Controller
         return $cart;
     }
 
-    private function getCartTotal($cartItems):float{
+    private function isCartEmpty($cartItems){
+        if(empty($cartItems) || $this->getCartTotalValue($cartItems) === 0) return true;
+    }
+
+    private function getCartTotalValue($cartItems):float{
         $total = 0;
         foreach ($cartItems as $item){
             $total += ($item['price']) * ($item['quantity']);
         }
         return $total;
-    }
-
-    private function isCartEmpty($cartItems){
-        if(empty($cartItems) || $this->getCartTotal($cartItems) === 0) return true;
     }
 
     private function redirectToMainWithEmptyCartMessage(){
@@ -53,18 +53,15 @@ class CartController extends Controller
             $cartUpdated = $this->cartSumQuantity($cart, $id);
         }else{
             $cartUpdated = $this->cartCreateNewItem($cart, $id);
-        }
-    
-        session()->put('cart', $cartUpdated);
+        } 
+        
+        $this->putCartUpdatedToSession($cartUpdated);
 
-
-        $total = array_sum(array_column($cartUpdated, 'quantity'));
-        session()->put('total', $total);
-
+        $totalItems = $this->getCartTotalItems($cartUpdated);
 
          return response()->json([
         'success' => true,
-        'total' => $total,
+        'total' => $totalItems,
         'cart' => $cartUpdated
          ]);
         
@@ -83,6 +80,14 @@ class CartController extends Controller
             'price' => $pizza->price
         ];
         return $cart;
+   }
+
+   private function putCartUpdatedToSession($cartUpdated){
+        return session()->put('cart', $cartUpdated);
+   }
+
+   private function getCartTotalItems(array $cart){
+        return array_sum(array_column($cart, 'quantity'));
    }
 
 
