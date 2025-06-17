@@ -49,7 +49,7 @@ class CartController extends Controller
 
     public function add($id){
         $pizza = Pizza::findorfail($id);
-        $cart = session()->get('cart', []);
+        $cart = $this->getCartItems();
         if(isset($cart[$id])){
             $cart[$id]['quantity']+=1;
         }else{
