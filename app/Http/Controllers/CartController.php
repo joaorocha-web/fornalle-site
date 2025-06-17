@@ -30,8 +30,8 @@ class CartController extends Controller
         return $total;
     }
 
-    private function isCartEmpty($cartItems):bool{
-        return $this->getCartTotal($cartItems) === 0;
+    private function isCartEmpty($cartItems){
+        if(empty($cartItems) || $this->getCartTotal($cartItems) === 0) return true;
     }
 
     private function redirectToMainWithEmptyCartMessage(){
