@@ -95,55 +95,64 @@ class CartController extends Controller
    private function getCartTotalItems(array $cart):int{
         return array_sum(array_column($cart, 'quantity'));
    }
+   //olaaaa
 
 
-    
+   
    public function remove($id)
-{
-    try {
-        $cart = session()->get('cart', []);
-        $responseData = [];
+    {
+        try {
+            $cart = session()->get('cart', []);
+            $responseData = [];
 
-        if (!isset($cart[$id])) {
+            if (!isset($cart[$id])) {
+                $this->responseItemDoesNotExist();
+            }
+
+            if ($cart[$id]['quantity'] > 1) {
+                $cart = $this->cartMinusQuantity($cart, $id);
+                $responseData['quantity'] = $cart[$id]['quantity'];
+            } else {
+                unset($cart[$id]);
+                $responseData['quantity'] = 0;
+            }
+
+            // Calcula o total corretamente
+            $totalPrice = 0;
+            foreach ($cart as $item) {
+                $totalPrice += $item['price'] * $item['quantity'];
+            }
+
+            $total = 0;
+            foreach ($cart as $item) {
+                $total +=  $item['quantity'];
+            }
+
+            session()->put('total', $total);
+            session()->put('cart', $cart);
+
+            return response()->json([
+                'success' => true,
+                'total' => $totalPrice,
+                'quantity' => $responseData['quantity'] ?? 0
+            ]);
+
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Item não encontrado no carrinho'
-            ], 404);
+                'message' => 'Erro interno: ' . $e->getMessage()
+            ], 500);
         }
-
-        if ($cart[$id]['quantity'] > 1) {
-            $cart[$id]['quantity']--;
-            $responseData['quantity'] = $cart[$id]['quantity'];
-        } else {
-            unset($cart[$id]);
-            $responseData['quantity'] = 0;
-        }
-
-        // Calcula o total corretamente
-        $totalPrice = 0;
-        foreach ($cart as $item) {
-            $totalPrice += $item['price'] * $item['quantity'];
-        }
-
-        $total = 0;
-        foreach ($cart as $item) {
-            $total +=  $item['quantity'];
-        }
-
-        session()->put('total', $total);
-        session()->put('cart', $cart);
-
-        return response()->json([
-            'success' => true,
-            'total' => $totalPrice,
-            'quantity' => $responseData['quantity'] ?? 0
-        ]);
-
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Erro interno: ' . $e->getMessage()
-        ], 500);
     }
-}
+
+    private function responseItemDoesNotExist(){
+        return response()->json([
+                    'success' => false,
+                    'message' => 'Item não encontrado no carrinho'
+                ], 404);
+    }
+
+    private function cartMinusQuantity(array $cart, int $id){
+        $cart[$id]['quantity']-=1;
+    }
 }
