@@ -3,17 +3,12 @@
 namespace App\Http\Controllers;
 use App\Models\Pizza;
 
-use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function show(){
-        $cart = session()->get('cart', []);
-        $total = 0;
-        foreach ($cart as $item){
-            $total += ($item['price']) * ($item['quantity']);
-        }
-        
+    public function showCart(){
+        $cart = $this->getCartItems();
+        $total = $this->getCartTotal($cart);
         $totalFormated = number_format($total, 2, ',','.');
         if($total === 0){
             return redirect()->route('main')->with('error', 'Seu carrinho está vazio.');
@@ -22,6 +17,19 @@ class CartController extends Controller
             'cart' => $cart,
             'total' => $totalFormated
         ]);
+    }
+
+    public function getCartItems(){
+        $cart = session()->get('cart', []);
+        return $cart;
+    }
+
+    public function getCartTotal($cart){
+        $total = 0;
+        foreach ($cart as $item){
+            $total += ($item['price']) * ($item['quantity']);
+        }
+        return $total;
     }
 
     public function add($id){

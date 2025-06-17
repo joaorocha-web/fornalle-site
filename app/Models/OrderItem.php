@@ -25,13 +25,13 @@ class OrderItem extends Model
         return $this->belongsTo(Pizza::class);
     }
 
-    // OrderItem.php
+    
     public static function getBestSellers()
     {
         
         return self::selectRaw('pizza_id, SUM(quantity) as total')
             ->with('pizza')
-            ->whereHas('pizza') // Garante que só traz pizzas existentes
+            ->whereHas('pizza') 
             ->groupBy('pizza_id')
             ->orderByDesc('total')
             ->limit(10)

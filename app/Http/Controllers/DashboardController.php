@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        return view('admin.dashboard'); // View principal sem dados
+        return view('admin.dashboard'); 
     }
     
     public function showBestSellers(){
