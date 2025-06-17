@@ -22,7 +22,11 @@ class CartController extends Controller
         return $cart;
     }
 
-    private function getCartTotal($cartItems):float{
+    private function isCartEmpty(array $cartItems){
+        if(empty($cartItems) || $this->getCartTotalValue($cartItems) === 0) return true;
+    }
+
+    private function getCartTotalValue(array $cartItems):float{
         $total = 0;
         foreach ($cartItems as $item){
             $total += ($item['price']) * ($item['quantity']);
@@ -30,16 +34,12 @@ class CartController extends Controller
         return $total;
     }
 
-    private function isCartEmpty($cartItems){
-        if(empty($cartItems) || $this->getCartTotal($cartItems) === 0) return true;
-    }
-
     private function redirectToMainWithEmptyCartMessage(){
         return redirect()->route('main')->with('error', 'Seu carrinho está vazio.');
     }
 
-    private function renderCartView($cartItems){
-        $total = $this->getCartTotal($cartItems);
+    private function renderCartView(array $cartItems){
+        $total = $this->getCartTotalValue($cartItems);
         $formatedTotal = FormatHelper::money($total);
          return view('site.cart', [
             'cart' => $cartItems,
@@ -47,31 +47,53 @@ class CartController extends Controller
         ]);
     }
 
-    public function add($id){
-        $pizza = Pizza::findorfail($id);
-        $cart = session()->get('cart', []);
+    public function addItemToCart(int $id){
+        $cart = $this->getCartItems();
+        
         if(isset($cart[$id])){
-            $cart[$id]['quantity']+=1;
+            $cart = $this->cartSumQuantity($cart, $id);
         }else{
-            $cart[$id] = [
+            $cart = $this->cartCreateNewItem($cart, $id);
+        }        
+        
+        $this->saveCartToSession($cart);
+
+        return $this->createCartResponse($cart);   
+   }
+
+   private function cartSumQuantity(array $cart, int $id):array{
+        $cart[$id]['quantity']+=1;
+        return $cart;
+   }
+
+   private function cartCreateNewItem(array $cart, int $id):array{
+        $pizza = Pizza::findorfail($id);
+        
+        $cart[$id] = [
             'name' => $pizza->name,
             'quantity' => 1,
             'price' => $pizza->price
         ];
-        }
-        session()->put('cart', $cart);
+        
+        return $cart;
+   }
 
+   private function saveCartToSession(array $cartUpdated){
+        session()->put('cart', $cartUpdated);
+   }
 
-        $total = array_sum(array_column($cart, 'quantity'));
-        session()->put('total', $total);
+    private function createCartResponse(array $cart){
+        $totalItems = $this->getCartTotalItems($cart);
 
-
-         return response()->json([
+        return response()->json([
         'success' => true,
-        'total' => $total,
+        'total' => $totalItems,
         'cart' => $cart
          ]);
-        
+    }
+
+   private function getCartTotalItems(array $cart):int{
+        return array_sum(array_column($cart, 'quantity'));
    }
 
 
