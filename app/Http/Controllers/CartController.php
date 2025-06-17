@@ -2,34 +2,49 @@
 
 namespace App\Http\Controllers;
 use App\Models\Pizza;
+use App\Utilities\FormatHelper;
 
 
 class CartController extends Controller
 {
     public function showCart(){
-        $cart = $this->getCartItems();
-        $total = $this->getCartTotal($cart);
-        $totalFormated = number_format($total, 2, ',','.');
-        if($total === 0){
-            return redirect()->route('main')->with('error', 'Seu carrinho está vazio.');
+        $cartItems = $this->getCartItems();
+        
+        if($this->isCartEmpty($cartItems)){
+            return $this->redirectToMainWithEmptyCartMessage();
         }
-        return view('site.cart', [
-            'cart' => $cart,
-            'total' => $totalFormated
-        ]);
+
+        return $this->renderCartView($cartItems);
     }
 
-    public function getCartItems(){
+    private function getCartItems():array{
         $cart = session()->get('cart', []);
         return $cart;
     }
 
-    public function getCartTotal($cart){
+    private function getCartTotal($cartItems):float{
         $total = 0;
-        foreach ($cart as $item){
+        foreach ($cartItems as $item){
             $total += ($item['price']) * ($item['quantity']);
         }
         return $total;
+    }
+
+    private function isCartEmpty($cartItems):bool{
+        return $this->getCartTotal($cartItems) === 0;
+    }
+
+    private function redirectToMainWithEmptyCartMessage(){
+        return redirect()->route('main')->with('error', 'Seu carrinho está vazio.');
+    }
+
+    private function renderCartView($cartItems){
+        $total = $this->getCartTotal($cartItems);
+        $formatedTotal = FormatHelper::money($total);
+         return view('site.cart', [
+            'cart' => $cartItems,
+            'total' => $formatedTotal
+        ]);
     }
 
     public function add($id){
