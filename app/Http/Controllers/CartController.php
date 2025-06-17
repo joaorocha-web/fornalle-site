@@ -47,31 +47,42 @@ class CartController extends Controller
         ]);
     }
 
-    public function add($id){
-        $pizza = Pizza::findorfail($id);
+    public function addItemToCart($id){
         $cart = $this->getCartItems();
         if(isset($cart[$id])){
-            $cart[$id]['quantity']+=1;
+            $cartUpdated = $this->cartSumQuantity($cart, $id);
         }else{
-            $cart[$id] = [
-            'name' => $pizza->name,
-            'quantity' => 1,
-            'price' => $pizza->price
-        ];
+            $cartUpdated = $this->cartCreateNewItem($cart, $id);
         }
-        session()->put('cart', $cart);
+    
+        session()->put('cart', $cartUpdated);
 
 
-        $total = array_sum(array_column($cart, 'quantity'));
+        $total = array_sum(array_column($cartUpdated, 'quantity'));
         session()->put('total', $total);
 
 
          return response()->json([
         'success' => true,
         'total' => $total,
-        'cart' => $cart
+        'cart' => $cartUpdated
          ]);
         
+   }
+
+   private function cartSumQuantity($cart, $id){
+        $cart[$id]['quantity']+=1;
+        return $cart;
+   }
+
+   private function cartCreateNewItem($cart, $id){
+        $pizza = Pizza::findorfail($id);
+        $cart[$id] = [
+            'name' => $pizza->name,
+            'quantity' => 1,
+            'price' => $pizza->price
+        ];
+        return $cart;
    }
 
 
