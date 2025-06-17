@@ -22,11 +22,11 @@ class CartController extends Controller
         return $cart;
     }
 
-    private function isCartEmpty($cartItems){
+    private function isCartEmpty(array $cartItems){
         if(empty($cartItems) || $this->getCartTotalValue($cartItems) === 0) return true;
     }
 
-    private function getCartTotalValue($cartItems):float{
+    private function getCartTotalValue(array $cartItems):float{
         $total = 0;
         foreach ($cartItems as $item){
             $total += ($item['price']) * ($item['quantity']);
@@ -38,8 +38,8 @@ class CartController extends Controller
         return redirect()->route('main')->with('error', 'Seu carrinho está vazio.');
     }
 
-    private function renderCartView($cartItems){
-        $total = $this->getCartTotal($cartItems);
+    private function renderCartView(array $cartItems){
+        $total = $this->getCartTotalValue($cartItems);
         $formatedTotal = FormatHelper::money($total);
          return view('site.cart', [
             'cart' => $cartItems,
@@ -47,46 +47,52 @@ class CartController extends Controller
         ]);
     }
 
-    public function addItemToCart($id){
+    public function addItemToCart(int $id){
         $cart = $this->getCartItems();
+        
         if(isset($cart[$id])){
-            $cartUpdated = $this->cartSumQuantity($cart, $id);
+            $cart = $this->cartSumQuantity($cart, $id);
         }else{
-            $cartUpdated = $this->cartCreateNewItem($cart, $id);
-        } 
+            $cart = $this->cartCreateNewItem($cart, $id);
+        }        
         
-        $this->putCartUpdatedToSession($cartUpdated);
+        $this->saveCartToSession($cart);
 
-        $totalItems = $this->getCartTotalItems($cartUpdated);
-
-         return response()->json([
-        'success' => true,
-        'total' => $totalItems,
-        'cart' => $cartUpdated
-         ]);
-        
+        return $this->createCartResponse($cart);   
    }
 
-   private function cartSumQuantity($cart, $id){
+   private function cartSumQuantity(array $cart, int $id):array{
         $cart[$id]['quantity']+=1;
         return $cart;
    }
 
-   private function cartCreateNewItem($cart, $id){
+   private function cartCreateNewItem(array $cart, int $id):array{
         $pizza = Pizza::findorfail($id);
+        
         $cart[$id] = [
             'name' => $pizza->name,
             'quantity' => 1,
             'price' => $pizza->price
         ];
+        
         return $cart;
    }
 
-   private function putCartUpdatedToSession($cartUpdated){
-        return session()->put('cart', $cartUpdated);
+   private function saveCartToSession(array $cartUpdated){
+        session()->put('cart', $cartUpdated);
    }
 
-   private function getCartTotalItems(array $cart){
+    private function createCartResponse(array $cart){
+        $totalItems = $this->getCartTotalItems($cart);
+
+        return response()->json([
+        'success' => true,
+        'total' => $totalItems,
+        'cart' => $cart
+         ]);
+    }
+
+   private function getCartTotalItems(array $cart):int{
         return array_sum(array_column($cart, 'quantity'));
    }
 
