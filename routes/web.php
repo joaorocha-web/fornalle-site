@@ -56,7 +56,7 @@ Route::get('/admin/reports/{type}', [DashboardController::class, 'showReport']);
 
 Route::post('/cart/{id}', [CartController::class, 'addItemToCart'])->where('id', '[0-9]+')->name('cart.add');
 Route::get('/cart', [CartController::class, 'showCart'])->where('id', '[0-9]+')->name('cart.show');
-Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->where('id', '[0-9]+')->name('cart.remove');
+Route::delete('/cart/remove/{id}', [CartController::class, 'removeItemFromCart'])->where('id', '[0-9]+')->name('cart.remove');
 
 Route::get('/checkout', [CheckOutController::class, 'showCheckoutForm'])->name('checkout.form');
 Route::post('/checkout', [CheckOutController::class, 'finishCheckout'])->name('checkout.finish');

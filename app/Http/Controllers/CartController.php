@@ -95,14 +95,14 @@ class CartController extends Controller
    private function getCartTotalItems(array $cart):int{
         return array_sum(array_column($cart, 'quantity'));
    }
-   //olaaaa
+   
 
 
    
-   public function remove($id)
+   public function removeItemFromCart($id)
     {
         try {
-            $cart = session()->get('cart', []);
+            $cart = $this->getCartItems();
             $responseData = [];
 
             if (!isset($cart[$id])) {
@@ -153,6 +153,7 @@ class CartController extends Controller
     }
 
     private function cartMinusQuantity(array $cart, int $id){
-        $cart[$id]['quantity']-=1;
+        $cart[$id]['quantity']--;
+        return $cart;
     }
 }
