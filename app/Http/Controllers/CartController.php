@@ -23,10 +23,10 @@ class CartController extends Controller
     }
 
     private function isCartEmpty(array $cartItems){
-        if(empty($cartItems) || $this->getCartTotalValue($cartItems) === 0) return true;
+        if(empty($cartItems) || $this->getCartTotalPrice($cartItems) === 0) return true;
     }
 
-    private function getCartTotalValue(array $cartItems):float{
+    private function getCartTotalPrice(array $cartItems):float{
         $total = 0;
         foreach ($cartItems as $item){
             $total += ($item['price']) * ($item['quantity']);
@@ -39,7 +39,7 @@ class CartController extends Controller
     }
 
     private function renderCartView(array $cartItems){
-        $total = $this->getCartTotalValue($cartItems);
+        $total = $this->getCartTotalPrice($cartItems);
         $formatedTotal = FormatHelper::money($total);
          return view('site.cart', [
             'cart' => $cartItems,
@@ -105,31 +105,22 @@ class CartController extends Controller
             $cart = $this->getCartItems();
             $responseData = [];
 
-            if (!isset($cart[$id])) {
-                $this->responseItemDoesNotExist();
+            if ( $this->isInvalidItem($cart, $id)) {
+                return $this->responseItemDoesNotExist();
             }
 
-            if ($cart[$id]['quantity'] > 1) {
-                $cart = $this->cartMinusQuantity($cart, $id);
+            if ($this->isValidItem($cart, $id)) {
+                $this->cartMinusQuantity($cart, $id);
                 $responseData['quantity'] = $cart[$id]['quantity'];
             } else {
-                unset($cart[$id]);
-                $responseData['quantity'] = 0;
+                $this->excludeItem($cart, $id);
             }
 
-            // Calcula o total corretamente
-            $totalPrice = 0;
-            foreach ($cart as $item) {
-                $totalPrice += $item['price'] * $item['quantity'];
-            }
+            $totalPrice = $this->getCartTotalPrice($cart);
+            $totalItems = $this->getCartTotalItems($cart);
 
-            $total = 0;
-            foreach ($cart as $item) {
-                $total +=  $item['quantity'];
-            }
-
-            session()->put('total', $total);
-            session()->put('cart', $cart);
+            session()->put('total', $totalItems);
+            $this->saveCartToSession($cart);
 
             return response()->json([
                 'success' => true,
@@ -145,6 +136,10 @@ class CartController extends Controller
         }
     }
 
+    private function isInvalidItem(array $cart, int $id):bool{
+        return !isset($cart[$id]);
+    }
+
     private function responseItemDoesNotExist(){
         return response()->json([
                     'success' => false,
@@ -152,8 +147,15 @@ class CartController extends Controller
                 ], 404);
     }
 
-    private function cartMinusQuantity(array $cart, int $id){
+    private function isValidItem(array $cart, int $id):bool{
+        return $cart[$id]['quantity'] > 1;
+    }
+
+    private function cartMinusQuantity(array &$cart, int $id){
         $cart[$id]['quantity']--;
-        return $cart;
+    }
+
+    private function excludeItem(array &$cart, int $id){
+        unset($cart[$id]);
     }
 }
